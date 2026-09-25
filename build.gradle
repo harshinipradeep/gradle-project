@@ -1,0 +1,35 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+
+group = 'org.example'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    implementation 'org.seleniumhq.selenium:selenium-java:4.49.0'
+    testImplementation 'org.testng:testng:7.12.0'
+}
+
+test {
+    useTestNG()
+}
+application {
+    mainClass = 'org.example.Main'
+}
+tasks.register('copyResources', Copy) { Copy it ->
+    from 'src/main/resources'
+    into 'docs'
+}
+jar {
+    manifest{
+        attributes 'Main-Class': 'org.example.Main'
+    }
+}
+
