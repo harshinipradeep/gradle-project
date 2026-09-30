@@ -11,25 +11,20 @@ repositories {
 }
 
 dependencies {
-
+    testImplementation platform('org.junit:junit-bom:6.0.0')
     testImplementation 'org.junit.jupiter:junit-jupiter'
-    implementation 'org.seleniumhq.selenium:selenium-java:4.49.0'
-    testImplementation 'org.testng:testng:7.12.0'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
 
 test {
-    useTestNG()
+    useJUnitPlatform()
 }
-application {
-    mainClass = 'org.example.Main'
-}
-tasks.register('copyResources', Copy) { Copy it ->
-    from 'src/main/resources'
-    into 'docs'
-}
+application
+        {
+            mainClass='org.example.Main'
+        }
 jar {
     manifest{
-        attributes 'Main-Class': 'org.example.Main'
+        attributes 'Main-Class' : 'org.example.Main'
     }
 }
-
